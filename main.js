@@ -11,6 +11,7 @@ const FRAMERATE = 30;
 const maxBrushWidth = 100;
 const brushes = [];
 const commands = {
+    cmdToggleGrayscaleMode,
     cmdTogglePaintMode,
     cmdToggleStroke,
     cmdChangeBrushShape,
@@ -28,6 +29,7 @@ let colors = [];
 let brushShapes = ['circle', 'square'];
 let brushShapeIdx = 0;
 const switches = {
+    grayscaleEnabled: false,
     paintModeEnabled: false,
     strokeEnabled: false,
     drawingEnabled: true,
@@ -69,10 +71,42 @@ function limits(actual, min, max) {
 // Generator function to get a random color
 function * getColor(r,g,b) {
     while(true) {
-        [r, g, b] = [r,g,b].map( color => limits(color + ((random(2) > 1) ? 1 : -1), 0,255));
+        // Grayscale strategy
+        if (switches.grayscaleEnabled) {
+            let color = limits(r + ((random(2) > 1) ? 1 : -1), 0,255);
+            [r, g, b] = [color, color, color];
+        }
+        // RGB strategy
+        else {
+            [r, g, b] = [r,g,b].map( color => limits(color + ((random(2) > 1) ? 1 : -1), 0,255));
+        }
 
         yield [r, g, b];
     }
+}
+
+// Return a random RGB color
+function getRandomRgbColor() {
+    return [
+        round(random(255)),
+        round(random(255)),
+        round(random(255))
+    ];
+}
+
+// Return a grayscale color
+function getRandomGrayscaleColor() {
+    let color = round(random(255));
+    return [
+        color,
+        color,
+        color
+    ];
+}
+
+// Return a randome color, depending on the color mode
+function getRandomColor() {
+    return (switches.grayscaleEnabled) ? getRandomGrayscaleColor() : getRandomRgbColor();
 }
 
 // Return the size of a full-screen canvas while taking into account the margins
@@ -179,11 +213,7 @@ function setup() {
     frameRate(FRAMERATE);
     rectMode(CENTER);
 
-    colors = [
-        round(random(255)),
-        round(random(255)),
-        round(random(255))
-    ];
+    colors = getRandomColor();
     brushes.length = 0;
 
     updateTools();
@@ -340,12 +370,12 @@ function cmdTogglePaintMode() {
 }
 
 function cmdChangeColors() {
-    colors = [
-        round(random(255)),
-        round(random(255)),
-        round(random(255))
-    ];
-    brushes.map( s => s.setColor(colors));
+    colors = getRandomColor();
+    brushes.map(s => s.setColor(colors));
+}
+
+function cmdToggleGrayscaleMode() {
+    switches.grayscaleEnabled = !switches.grayscaleEnabled;
 }
 
 function cmdChangeBrushShape() {
@@ -395,6 +425,7 @@ window.addEventListener('keydown', e => {
         'p': cmdTogglePaintMode,
         // Colors
         'c': cmdChangeColors,
+        'g': cmdToggleGrayscaleMode,
         // Rotation
         'r': cmdChangeRotation,
         //Play/pause
