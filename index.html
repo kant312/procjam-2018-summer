@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Procjam 2018</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="toolbar">
+        <h1 class="title2">Procedural Painter</h1>
+        <ul>
+            <li>
+                <span class="icon  icon--switch" data-switch="paintModeEnabled"></span>
+                <button data-cmd="cmdTogglePaintMode">Toggle paint mode (P)</button>
+            </li>
+            <li>
+                <span class="icon  icon--switch" data-switch="strokeEnabled"></span>
+                <button data-cmd="cmdToggleStroke">Toggle border (S)</button>
+            </li>
+            <li>
+                <span class="icon icon--brush"></span>
+                <button data-cmd="cmdChangeBrushShape">Toggle brush (B)</button>
+            </li>
+            <li>
+                <span class="icon icon--color"></span>
+                <button data-cmd="cmdChangeColors">Random color (C)</button>
+            </li>
+            <li class="range">
+                Brushes amount (<span data-range-indicator="nbBrushes"></span>)
+                <div>
+                    0 <input type="range" min="0" max="500" data-range="nbBrushes" step="1" data-trigger-cmd="cmdChangeBrushesAmount"> 500
+                </div>
+            </li>
+            <li class="range">
+                Brushes width (<span data-range-indicator="brushWidth"></span>)
+                <div>
+                    0 <input type="range" min="0" max="100" data-range="brushWidth" step="1" data-trigger-cmd="cmdChangeBrushSize"> 100
+                </div>
+            </li>
+            <li class="range">
+                Brushes rotation (<span data-range-indicator="rotation"></span>)
+                <div>
+                    0 <input type="range" min="0" max="360" data-range="rotation" step="1" data-trigger-cmd="cmdChangeRotation"> 360
+                </div>
+            </li>
+            <li>
+                <span class="icon  icon--switch" data-switch="drawingEnabled"></span>
+                <button data-cmd="cmdPlayPause">Play/Pause (O)</button>
+            </li>
+        </ul>
+
+        <ul>
+            <li>
+                <button data-cmd="cmdShowHideToolbox">Show/hide toolbox (T)</button>
+            </li>
+            <li>
+                <button data-cmd="cmdShowHideHelp">Help (H)</button>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <button class="primary" data-cmd="cmdSaveCanvas">Export painting</button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="overlay"></div>
+    <div class="help">
+        <h2 class="title1">Procedural Painter</h2>
+        <p>
+            <small>
+                Made by <a href="https://www.twitter.com/kant312" target="_blank" rel="noopener"><em>@kant312</em></a> 
+                for <a href="http://www.procjam.com/" target="_blank" rel="noopener"><strong>Procjam 2018</strong></a>
+            </small>
+        </p>
+
+        <p>
+            Procedural Painter is a "procedural thingy" where you paint by being only partially in control.
+        </p>
+
+        <ul>
+            <li>You decide on the amount of brushes, their shape (squares or circles) and their orientation (which only makes sense for squares of course).</li>
+            <li>You can set the initial size of the brushes, but they will change constantly.</li>
+            <li>You can change the color of the brushes but the color is chosen randomly and keeps evolving all the time, for each brush.</li>
+            <li>You decide if the shape has a border or not.</li>
+        </ul>
+        
+        <p>
+            When you are ready to start painting, press "p" or click on "Toggle paint mode", 
+            this will stop the screen from being refreshed and the brushes will start painting.
+        </p>
+
+        <p>
+            You can click on "Export painting" when you are satisfied with the painting.
+            <br> If you want, don't hesitate to send me the paintings you made, I'm curious 🙂
+        </p>
+
+        <p>
+            Enjoy!
+        </p>
+
+        <p>
+            <button data-cmd="cmdShowHideHelp">Close</button>
+        </p>
+    </div>
+
+    <script src="p5.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

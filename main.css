@@ -1,0 +1,172 @@
+body {
+    background: #111111;
+    color: #e0e0e0;
+    font: 62.5%/1.4 sans-serif;
+    margin: 0;
+}
+
+a {
+    color: #EF8E69;
+}
+
+canvas {
+    display: block;
+    margin:0;
+}
+
+.title1,
+.title2 {
+    margin: 0 0 1em;
+}
+
+.title1 {
+    font-size: 1.4rem;
+}
+
+.title2 {
+    font-size: 1rem;
+}
+
+.overlay {
+    display: none;
+    background: #333333;
+    opacity: 0.9;
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.help {
+    font-size: .9rem;
+    display: none;
+    position: fixed;
+    width: 75%;
+    top: 10%;
+    left: 50%;
+    margin-left: -37.5%;
+    z-index: 3;
+    background: #444444;
+    padding: 1.4em;
+    box-sizing: border-box;
+}
+
+.help ul {
+    margin: 1em 0;
+}
+
+.help li {
+    padding: 0 0 0 1em;
+}
+
+@media only screen and (min-width: 750px) {
+    .help {
+        font-size: 1.2rem;
+    }
+}
+
+small {
+    font-size: .9rem;
+}
+
+.overlay[data-visibility=visible],
+.help[data-visibility=visible] {
+    display: block;
+}
+
+.toolbar {
+    position: fixed;
+    top: 1.5em;
+    left: 1.5em;
+    width: 200px;
+    height: 90vh;
+    padding: 1em;
+    background: rgba(50,50,50,0.5);
+    transition: margin-left .15s ease-out;
+}
+
+.toolbar[data-visibility=invisible] {
+    margin-left: -300px;
+}
+
+.toolbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toolbar ul {
+    margin-bottom: 1em;
+}
+
+.toolbar li {
+    padding-bottom: .5em;
+    margin: 0;
+}
+
+li.range {
+    margin: 1.5em 0;
+}
+
+button {
+    background: #444;
+    border: 1px solid #999;
+    color: #e0e0e0;
+    padding: .8em;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+button:hover {
+    background: #555;
+}
+
+button.primary {
+    font-weight: 600;
+    background:#554444;
+}
+
+button.primary:hover {
+    background: #5f4f4f;
+}
+
+input[type=range] {
+    width: 50%;
+}
+
+.icon {
+    display: inline-block;
+    font-size: 2.4em;
+    width: 24px;
+    vertical-align: middle;
+    margin-right: .5em;
+}
+
+.icon::before {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.icon--brush[data-brush=square]::before {
+    content: '◼️';
+}
+
+.icon--brush[data-brush=circle]::before {
+    content: '⚫';
+}
+
+.icon--switch[data-enabled=on]::before {
+    content: '💚';
+}
+
+.icon--switch[data-enabled=off]::before {
+    content: '🔴';
+}
+
+.icon--color {
+    border-radius: 50%;
+    display: inline-block;
+    height: 24px;
+}
